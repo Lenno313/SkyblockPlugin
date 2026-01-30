@@ -1,0 +1,10 @@
+name: Skyblock
+version: ${version}
+main: de.lenno.skyblock.Skyblock
+api-version: '1.21'
+authors: [ Lenno ]
+description: Dieses Plugin soll das Spawnen von Inseln pro Person ermöglichen
+commands:
+  test:
+    description: Testbefehl für Skyblock
+    aliases: [t]
