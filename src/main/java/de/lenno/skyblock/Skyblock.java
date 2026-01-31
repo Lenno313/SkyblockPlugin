@@ -3,6 +3,7 @@ package de.lenno.skyblock;
 import de.lenno.skyblock.commands.TestCommand;
 import de.lenno.skyblock.events.JoinEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
@@ -29,6 +30,14 @@ public final class Skyblock extends JavaPlugin {
         sendConsoleMessage("Das Plugin wird gestoppt .. ");
         sendConsoleMessage("Das Plugin wurde erfolgreich gestoppt!");
     }
+
+    @Override
+    public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
+        getLogger().info("!!! DER VOID-GENERATOR WIRD AKTIVIERT FUER: " + worldName + " !!!");
+        return new VoidGenerator();
+    }
+
+
 
     public void registerEvents() {
         Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);

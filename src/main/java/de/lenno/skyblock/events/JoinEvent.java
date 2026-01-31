@@ -1,9 +1,11 @@
 package de.lenno.skyblock.events;
 
 import de.lenno.skyblock.Skyblock;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class JoinEvent implements Listener {
@@ -17,3 +19,4 @@ public class JoinEvent implements Listener {
         player.sendMessage(Skyblock.PLUGIN_PREFIX + "§fViel Spaß beim Bauen!");
     }
 }
+
