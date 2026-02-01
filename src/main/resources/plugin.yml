@@ -8,3 +8,7 @@ commands:
   test:
     description: Testbefehl für Skyblock
     aliases: [t]
+  spawnvillager:
+    description: Testbefehl für Skyblock
+    aliases: [t]
+load: STARTUP

@@ -9,22 +9,18 @@ public class VoidGenerator extends ChunkGenerator {
     // Diese Methode lässt die Oberfläche leer
     @Override
     public void generateSurface(WorldInfo worldInfo, Random random, int chunkX, int chunkZ, ChunkData chunkData) {
-        // Hier passiert absichtlich NICHTS.
+        // Hier bleibt alles leer.
     }
 
-    // Verhindert das Generieren von Bedrock ganz unten
+    // Diese Methoden sind in 1.21 extrem wichtig für absolutes Void:
     @Override
-    public boolean shouldGenerateBedrock() {
-        return false;
-    }
-
-    // Verhindert Höhlen, Strukturen (Dörfer etc.) und Deko (Bäume/Gras)
+    public boolean shouldGenerateBedrock() { return false; }
     @Override
     public boolean shouldGenerateCaves() { return false; }
-
     @Override
     public boolean shouldGenerateDecorations() { return false; }
-
+    @Override
+    public boolean shouldGenerateMobs() { return false; }
     @Override
     public boolean shouldGenerateStructures() { return false; }
 }

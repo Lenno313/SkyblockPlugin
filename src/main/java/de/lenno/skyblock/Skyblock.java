@@ -1,6 +1,7 @@
 package de.lenno.skyblock;
 
 import de.lenno.skyblock.commands.TestCommand;
+import de.lenno.skyblock.commands.VillagerCommand;
 import de.lenno.skyblock.events.JoinEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.generator.ChunkGenerator;
@@ -9,12 +10,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Skyblock extends JavaPlugin {
 
+    private static Skyblock instance;
+
     public static String CONSOLE_PREFIX = "[System] ";
     public static String PLUGIN_PREFIX = "§7[§eSkyblock§7] §3";
 
     @Override
     public void onEnable() {
         sendConsoleMessage("Das Plugin wird geladen .. ");
+        instance = this;
+
+        saveDefaultConfig();
 
         sendConsoleMessage("Die Commands werden registriert .. ");
         registerCommands();
@@ -37,14 +43,17 @@ public final class Skyblock extends JavaPlugin {
         return new VoidGenerator();
     }
 
-
-
     public void registerEvents() {
         Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);
     }
 
     public void registerCommands() {
         getCommand("test").setExecutor(new TestCommand());
+        getCommand("spawnvillager").setExecutor(new VillagerCommand());
+    }
+
+    public static Skyblock getInstance() {
+        return instance;
     }
 
     public void sendConsoleMessage(String message) {
