@@ -28,9 +28,6 @@ public class TestCommand implements CommandExecutor {
         Player p = (Player) commandSender;
         p.sendMessage(Skyblock.PLUGIN_PREFIX + "§3Jo! Dat hat geklappt :)");
 
-        Location loc = p.getLocation();
-
-
         giveItem(p);
 
         return true;

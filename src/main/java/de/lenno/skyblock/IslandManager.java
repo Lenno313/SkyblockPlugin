@@ -3,8 +3,11 @@ package de.lenno.skyblock;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.TreeType;
+import org.bukkit.World;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.CreatureSpawner;
 import org.bukkit.block.data.Directional;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
@@ -28,6 +31,8 @@ public class IslandManager {
         ItemStack ice = new ItemStack(Material.ICE);
         ItemStack birchSapling = new ItemStack(Material.MELON_SEEDS);
         ItemStack pumpkinSeeds = new ItemStack(Material.PUMPKIN_SEEDS);
+        ItemStack sweetBerryBush = new ItemStack(Material.SWEET_BERRY_BUSH);
+        ItemStack sugarCane = new ItemStack(Material.SUGAR_CANE);
 
         double value = Math.random();
             Material saplingMaterial = null;
@@ -45,6 +50,23 @@ public class IslandManager {
         items.add(birchSapling);
         items.add(pumpkinSeeds);
         items.add(sapling);
+        items.add(sweetBerryBush);
+        items.add(sugarCane);
+        return items;
+    }
+
+    private static List<ItemStack> getNetherChestItems() {
+        List<ItemStack> items = new ArrayList<>();
+        ItemStack brownMush = new ItemStack(Material.BROWN_MUSHROOM);
+        ItemStack redMush = new ItemStack(Material.RED_MUSHROOM);
+        ItemStack cocoaBean = new ItemStack(Material.COCOA_BEANS);
+        ItemStack beetrootSeed = new ItemStack(Material.BEETROOT_SEEDS);
+        ItemStack bamboo = new ItemStack(Material.BAMBOO);
+        items.add(brownMush);
+        items.add(redMush);
+        items.add(cocoaBean);
+        items.add(beetrootSeed);
+        items.add(bamboo);
         return items;
     }
 
@@ -105,6 +127,46 @@ public class IslandManager {
         Location cactusLog = loc.clone().add(1, 0, -1);
 
         for (int y = -3; y <= -1; y++) {
+            for (int x = -2; x < 2; x++) {
+                for (int z = -1; z <= 1; z++) {
+
+                    Location current = loc.clone().add(x, y, z);
+
+                    current.getBlock().setBlockData(Material.NETHERRACK.createBlockData(), false);
+                }
+            }
+        }
+
+        cactusLog.getBlock().setType(Material.CACTUS);
+
+        chestLoc.getBlock().setType(Material.CHEST);
+
+        // Einen zufälligen Sapling aus: birch, Spruce, Acacia, cherry
+        List<ItemStack> items = getSandChestItems();
+
+        Directional directional = (Directional) chestLoc.getBlock().getBlockData();
+
+        // 3. Die Blickrichtung setzen (NORTH, EAST, SOUTH, WEST)
+        directional.setFacing(BlockFace.EAST);
+
+        // 4. Die geänderte BlockData zurück an den Block geben
+        chestLoc.getBlock().setBlockData(directional);
+
+        // Kiste mit Inhalt füllen
+        if (chestLoc.getBlock().getState() instanceof org.bukkit.block.Chest chest) {
+
+            for (ItemStack item : items) {
+                if (item != null) {
+                    chest.getInventory().addItem(item);
+                }
+            }
+        }
+    }
+    public static void generateNetherIsland(Location loc) {
+        Location chestLoc = loc.clone().add(-1, 0, 1);
+        Location cactusLog = loc.clone().add(1, 0, -1);
+
+        for (int y = -3; y <= -1; y++) {
             for (int x = -1; x <= 1; x++) {
                 for (int z = -1; z <= 1; z++) {
 
@@ -139,5 +201,78 @@ public class IslandManager {
                 }
             }
         }
+
+        Location spawnerIslandLoc = loc.clone();
+        spawnerIslandLoc.setX(loc.getBlockX() - Integer.signum(loc.getBlockX()) * 35);
+        spawnerIslandLoc.setZ(loc.getBlockZ() - Integer.signum(loc.getBlockZ()) * 35);
+        generateBlazeIsland(spawnerIslandLoc);
+    }
+
+    public static void generateBlazeIsland(Location loc) {
+        Location chestLoc = loc.clone().add(-1, 0, 1);
+        Location blazeSpawner = loc.clone().add(1, 0, -1);
+
+        for (int y = -3; y <= -1; y++) {
+            for (int x = -1; x <= 1; x++) {
+                for (int z = -1; z <= 1; z++) {
+
+                    Location current = loc.clone().add(x, y, z);
+
+                    current.getBlock().setBlockData(Material.NETHER_BRICKS.createBlockData(), false);
+                }
+            }
+        }
+
+        blazeSpawner.getBlock().setType(Material.SPAWNER);
+        if (blazeSpawner.getBlock().getState() instanceof CreatureSpawner spawner) {
+            spawner.setSpawnedType(EntityType.BLAZE);
+            spawner.update();
+        }
+
+        chestLoc.getBlock().setType(Material.CHEST);
+
+        // Einen zufälligen Sapling aus: birch, Spruce, Acacia, cherry
+        List<ItemStack> items = getSandChestItems();
+
+        Directional directional = (Directional) chestLoc.getBlock().getBlockData();
+
+        // 3. Die Blickrichtung setzen (NORTH, EAST, SOUTH, WEST)
+        directional.setFacing(BlockFace.EAST);
+
+        // 4. Die geänderte BlockData zurück an den Block geben
+        chestLoc.getBlock().setBlockData(directional);
+
+        // Kiste mit Inhalt füllen
+        if (chestLoc.getBlock().getState() instanceof org.bukkit.block.Chest chest) {
+
+            for (ItemStack item : items) {
+                if (item != null) {
+                    chest.getInventory().addItem(item);
+                }
+            }
+        }
+    }
+
+    public static List<Location> getIslandLocations(World world) {
+        List<Location> locs = new ArrayList<>();
+
+        locs.add(new Location(world, 0, 67, 100));
+        locs.add(new Location(world, 100, 67, -100));
+        locs.add(new Location(world, 100, 67, 100));
+        locs.add(new Location(world, -100, 67, -100));
+        locs.add(new Location(world, 0, 67, -100));
+        locs.add(new Location(world, -100, 67, 100));
+        locs.add(new Location(world, -100, 67, 0));
+        locs.add(new Location(world, 100, 67, 0));
+        locs.add(new Location(world, 0, 67, 200));
+        locs.add(new Location(world, 200, 67, 0));
+        locs.add(new Location(world, -200, 67, 0));
+        locs.add(new Location(world, 0, 67, 200));
+        locs.add(new Location(world, 100, 67, 200));
+        locs.add(new Location(world, -100, 67, -200));
+        locs.add(new Location(world, 100, 67, -200));
+        locs.add(new Location(world, -100, 67, 200));
+
+        return locs;
     }
 }
