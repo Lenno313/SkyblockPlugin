@@ -5,6 +5,7 @@ import de.lenno.skyblock.commands.VillagerCommand;
 import de.lenno.skyblock.events.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -57,6 +58,9 @@ public final class Skyblock extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new HitEvent(), this);
         Bukkit.getPluginManager().registerEvents(new RespawnEvent(), this);
         Bukkit.getPluginManager().registerEvents(new InteractEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new PortalEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new GeneratorEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new DamageEvent(), this);
     }
 
     public void registerCommands() {

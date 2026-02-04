@@ -1,5 +1,6 @@
 package de.lenno.skyblock;
 
+import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.generator.WorldInfo;
 import java.util.Random;
@@ -20,7 +21,12 @@ public class VoidGenerator extends ChunkGenerator {
     @Override
     public boolean shouldGenerateDecorations() { return false; }
     @Override
-    public boolean shouldGenerateMobs() { return false; }
+    public boolean shouldGenerateMobs() { return true; }
     @Override
     public boolean shouldGenerateStructures() { return false; }
+
+    @Override
+    public BiomeProvider getDefaultBiomeProvider(WorldInfo worldInfo) {
+        return new SkyblockBiomeProvider(); // Hier deinen Provider zurückgeben
+    }
 }

@@ -78,6 +78,11 @@ public class TradingInterface {
             jungleSapling.addIngredient(createSilverCoin(1));
             recipes.add(jungleSapling);
 
+            // 1 Silvercoin -> Cherry Sapling
+            MerchantRecipe cherrySapling = new MerchantRecipe(new ItemStack(Material.CHERRY_SAPLING), 9999);
+            cherrySapling.addIngredient(createSilverCoin(1));
+            recipes.add(cherrySapling);
+
             // 4 Silvercoins -> 4 Dark oak sapling
             MerchantRecipe darkOakSaplings = new MerchantRecipe(new ItemStack(Material.DARK_OAK_SAPLING, 4), 9999);
             darkOakSaplings.addIngredient(createSilverCoin(4));
@@ -89,7 +94,7 @@ public class TradingInterface {
             recipes.add(palmtreeSapling);
 
             // 8 Silvercoins -> 1 flowerin azalea
-            MerchantRecipe floweringAzalea = new MerchantRecipe(new ItemStack(Material.AZALEA), 9999);
+            MerchantRecipe floweringAzalea = new MerchantRecipe(new ItemStack(Material.FLOWERING_AZALEA), 9999);
             floweringAzalea.addIngredient(createSilverCoin(8));
             recipes.add(floweringAzalea);
         }
@@ -110,7 +115,7 @@ public class TradingInterface {
 
             // Armadillo Spawn Egg für 8 Gold-Coins
             MerchantRecipe armadillo = new MerchantRecipe(new ItemStack(Material.ARMADILLO_SPAWN_EGG), 9999);
-            armadillo.addIngredient(createGoldCoin(8));
+            armadillo.addIngredient(createGoldCoin(4));
             recipes.add(armadillo);
         }
         if (type == VillagerType.ARCHÄOLOGE) {
@@ -119,12 +124,17 @@ public class TradingInterface {
             dirtSand.addIngredient(new ItemStack(Material.DIRT));
             recipes.add(dirtSand);
 
+            // 2 CobbleStone -> 1 Cobbled deepslae
+            MerchantRecipe deepslate = new MerchantRecipe(new ItemStack(Material.COBBLED_DEEPSLATE, 1), 9999);
+            deepslate.addIngredient(new ItemStack(Material.COBBLESTONE, 2));
+            recipes.add(deepslate);
+
             // 1 Silver-Coin -> 2 Suspicious Sand / Gravel
-            MerchantRecipe susSand = new MerchantRecipe(new ItemStack(Material.SUSPICIOUS_SAND, 2), 9999);
+            MerchantRecipe susSand = new MerchantRecipe(new ItemStack(Material.SUSPICIOUS_SAND, 1), 9999);
             susSand.addIngredient(createSilverCoin(1));
             recipes.add(susSand);
 
-            MerchantRecipe susGravel = new MerchantRecipe(new ItemStack(Material.SUSPICIOUS_GRAVEL, 2), 9999);
+            MerchantRecipe susGravel = new MerchantRecipe(new ItemStack(Material.SUSPICIOUS_GRAVEL, 1), 9999);
             susGravel.addIngredient(createSilverCoin(1));
             recipes.add(susGravel);
 
@@ -139,24 +149,25 @@ public class TradingInterface {
             shulker.addIngredient(createGoldCoin(4));
             recipes.add(shulker);
 
-            // Dripstone Stuff
+            // PointedDripstone
             MerchantRecipe pointedDrip = new MerchantRecipe(new ItemStack(Material.POINTED_DRIPSTONE), 9999);
             pointedDrip.addIngredient(createGoldCoin(1));
             recipes.add(pointedDrip);
 
+            // Dripstone block
             MerchantRecipe dripBlock = new MerchantRecipe(new ItemStack(Material.DRIPSTONE_BLOCK), 9999);
-            dripBlock.addIngredient(createGoldCoin(2));
+            dripBlock.addIngredient(createGoldCoin(4));
             recipes.add(dripBlock);
 
             // High-End Loot
-            // 8 Gold-Coins -> 1 Netherite Scrap
+            // 2 Gold-Coins -> 1 Netherite Scrap
             MerchantRecipe netherite = new MerchantRecipe(new ItemStack(Material.NETHERITE_SCRAP), 9999);
-            netherite.addIngredient(createGoldCoin(8));
+            netherite.addIngredient(createGoldCoin(2));
             recipes.add(netherite);
 
-            // 16 Gold-Coins - 1 Budding Amethyst (Der Block, an dem Kristalle wachsen)
+            // 8 Gold-Coins - 1 Budding Amethyst (Der Block, an dem Kristalle wachsen)
             MerchantRecipe amethyst = new MerchantRecipe(new ItemStack(Material.BUDDING_AMETHYST), 9999);
-            amethyst.addIngredient(createGoldCoin(16));
+            amethyst.addIngredient(createGoldCoin(8));
             recipes.add(amethyst);
 
             // 64 Gold-Coins -> 1 Elytra

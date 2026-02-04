@@ -55,6 +55,8 @@ public class JoinEvent implements Listener {
             Skyblock.getInstance().getConfig().set("players." + uuid + ".x", x);
             Skyblock.getInstance().getConfig().set("players." + uuid + ".y", y);
             Skyblock.getInstance().getConfig().set("players." + uuid + ".z", z);
+            Skyblock.getInstance().getConfig().set("players." + uuid + ".has_nether_poral", "false");
+
 
             // Insel-Zähler erhöhen für den nächsten Spieler
             Skyblock.getInstance().getConfig().set("island-count", islandCount + 1);
