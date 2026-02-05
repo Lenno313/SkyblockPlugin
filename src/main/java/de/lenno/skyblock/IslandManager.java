@@ -9,7 +9,9 @@ import org.bukkit.block.CreatureSpawner;
 import org.bukkit.block.data.Directional;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +20,10 @@ public class IslandManager {
 
     private static List<ItemStack> getBaseChestItems() {
         List<ItemStack> items = new ArrayList<>();
+        ItemStack infoBook = createBookItem();
         ItemStack ice = new ItemStack(Material.ICE);
         ItemStack lavaBucket = new ItemStack(Material.LAVA_BUCKET);
+        items.add(infoBook);
         items.add(ice);
         items.add(lavaBucket);
         return items;
@@ -274,5 +278,61 @@ public class IslandManager {
         locs.add(new Location(world, -100, 67, 200));
 
         return locs;
+    }
+
+    private static ItemStack createBookItem() {
+        // 1. Ein beschriebenes Buch erstellen
+        ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+        BookMeta meta = (BookMeta) book.getItemMeta();
+
+        if (meta != null) {
+            // 2. Titel und Autor setzen
+            meta.setTitle("§6Skyblock");
+            meta.setAuthor("CBT & Lenno");
+
+            // 3. Seiten hinzufügen
+            meta.addPage(
+                    "§l§7Willkommen bei§r\n" +
+                            "§6§lSkyblock +§r\n\n" +
+                            "§7Wir haben uns einige Gedanken gemacht, wie wir das Ganze hier etwas" +
+                            "§e§laufregender §7und vor allem §a§labwechslungsreicher §7gestalten können.\n\n" +
+                            "§7Hier fassen wir dir einmal zusammen, was wir angepasst haben.\n" +
+                            "§7Und war es dabei wichtig alles möglichst §eVanilla §7zu halten!"
+            );
+
+            meta.addPage(
+                    "§l§c'Neue' Items§r\n\n" +
+                            "§7Wir haben Wege eingeführt, um an Blöcke & Items zu kommen, die sonst in Skyblock §cnicht erreichbar §7wären.\n" +
+                            "§7Diese befinden sich teilweise in den §6Kisten §7auf euren Inseln, manche müssen aber" +
+                            "auch §aerspielt §7bzw. §eerworben §7werden.\n" +
+                            "§7Manche benötigen auch einiges an Glück beim §bAbbauen §7oder §1Angeln§7."
+            );
+
+            meta.addPage(
+                    "§l§2Biome§r\n\n" +
+                            "§7Wir haben in der gesamten Oberwelt das §aPlains-Biom§7.\n" +
+                            "§7Im Nether ist überall das §cNether-Wastes-Biom§7.\n\n" +
+                            "§l§8Tipp: §r§7Ab Höhe 175 könnte es langsam etwas §akälter §7werden...!"
+            );
+
+            meta.addPage(
+                    "§l§4Nether§r\n\n" +
+                            "§7Wenn du das §lERSTE §7mal auf deiner Insel in den §cNether §7gehst, wird dir eine §eStart-Insel §7erzeugt.^\n" +
+                            "§7Dafür musst du jedoch §cmindestens 40 Blöcke §7von anderen Portal entfernt sein."
+            );
+
+            meta.addPage(
+                    "§l§aBesondere Mobs§r\n\n" +
+                            "§7Wir haben eine Möglichkeit eingebaut §3Guardians §7und §8Wither-Skelette §7spawnen zu lassen.\n" +
+                            "§7Guardians können im Wasser über jeglicher Art von §3Prismarine-Blöcken §7spawnen.\n" +
+                            "§7Wither-Skelette können im Nether auf §4Nether-Bricks §7spawnen.\n\n" +
+                            "§l§8Tipp: §r§7Es soll dafür wohl neue Schätze beim Angeln geben. Und schau dazu dir mal den" +
+                            "§c'Basalt-Generator' §7im Nether an."
+            );
+
+            // 4. Meta zurückgeben und Buch dem Spieler geben
+            book.setItemMeta(meta);
+        }
+        return book;
     }
 }
