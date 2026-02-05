@@ -53,6 +53,8 @@ public final class Skyblock extends JavaPlugin {
     public void registerEvents() {
         Bukkit.getPluginManager().registerEvents(new SpawnEvent(), this);
         Bukkit.getPluginManager().registerEvents(new FishingEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new CraftingEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new FurnaceEvent(), this);
         Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new ChatEvent(), this);
         Bukkit.getPluginManager().registerEvents(new DeathEvent(), this);

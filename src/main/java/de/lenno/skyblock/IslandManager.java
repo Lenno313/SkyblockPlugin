@@ -7,9 +7,11 @@ import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.block.data.Directional;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
@@ -285,6 +287,16 @@ public class IslandManager {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
 
+        meta.addEnchant(Enchantment.LUCK_OF_THE_SEA, 1, true);
+
+        // 2. Die Verzauberung im Interface verstecken
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        // 3. Den Namen "Wissen" in die Lore schreiben
+        meta.setLore(java.util.Arrays.asList(
+                "§9Wissen III"
+        ));
+
         if (meta != null) {
             // 2. Titel und Autor setzen
             meta.setTitle("§6Skyblock");
@@ -296,8 +308,8 @@ public class IslandManager {
                             "§6§lSkyblock +§r\n\n" +
                             "§7Wir haben uns einige Gedanken gemacht, wie wir das Ganze hier etwas" +
                             "§e§laufregender §7und vor allem §a§labwechslungsreicher §7gestalten können.\n\n" +
-                            "§7Hier fassen wir dir einmal zusammen, was wir angepasst haben.\n" +
-                            "§7Und war es dabei wichtig alles möglichst §eVanilla §7zu halten!"
+                            "§7Uns war es dabei wichtig alles möglichst §eVanilla §7zu halten!\n" +
+                            "§7Hier fassen wir dir einmal zusammen, was wir dennoch angepasst haben.\n"
             );
 
             meta.addPage(
@@ -317,8 +329,9 @@ public class IslandManager {
 
             meta.addPage(
                     "§l§4Nether§r\n\n" +
-                            "§7Wenn du das §lERSTE §7mal auf deiner Insel in den §cNether §7gehst, wird dir eine §eStart-Insel §7erzeugt.^\n" +
-                            "§7Dafür musst du jedoch §cmindestens 40 Blöcke §7von anderen Portal entfernt sein."
+                            "§7Wenn du das §lERSTE §7mal auf deiner Insel in den §cNether §7gehst, wird dir eine §eStart-Insel §7erzeugt.\n" +
+                            "§7Dafür musst du jedoch §cmindestens 40 Blöcke §7von anderen Portal entfernt sein.\n\n" +
+                            "§7Wenn du Nether §cverlässt§7, gelangst du dabei immer zu deiner §aStart-Insel §7bzw. deinem §e(Re)Spawn-Punkt§7."
             );
 
             meta.addPage(
