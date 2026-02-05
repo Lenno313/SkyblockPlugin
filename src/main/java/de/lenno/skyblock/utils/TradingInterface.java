@@ -73,6 +73,11 @@ public class TradingInterface {
             recipes.add(goldCoinGold);
         }
         if (type == VillagerType.BOTANIKER) {
+            // 1 Silvercoin -> Brown Mushroom
+            MerchantRecipe brownMushroom = new MerchantRecipe(new ItemStack(Material.BROWN_MUSHROOM), 9999);
+            brownMushroom.addIngredient(createSilverCoin(1));
+            recipes.add(brownMushroom);
+
             // 1 Silvercoin -> Jungle Sapling
             MerchantRecipe jungleSapling = new MerchantRecipe(new ItemStack(Material.JUNGLE_SAPLING), 9999);
             jungleSapling.addIngredient(createSilverCoin(1));
